@@ -5,8 +5,8 @@ import { WeightData, WeightProgressChartProps } from '@/app/types';
 
 const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
   data,
-  width = 820,
-  height = 420,
+  width = 620,
+  height = 320,
   margin = { top: 20, right: 30, bottom: 60, left: 60 },
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -110,7 +110,7 @@ const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
       .append('text')
       .attr('class', 'axis-label')
       .attr('x', innerWidth / 2)
-      .attr('y', innerHeight + margin.bottom - 5)
+      .attr('y', innerHeight + margin.bottom - 9)
       .attr('text-anchor', 'middle')
       .style('font-size', '12px')
       .style('fill', theme.text)
@@ -122,7 +122,7 @@ const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
       .attr('class', 'axis-label')
       .attr('transform', 'rotate(-90)')
       .attr('x', -innerHeight / 2)
-      .attr('y', -margin.left + 20)
+      .attr('y', -margin.left + 18)
       .attr('text-anchor', 'middle')
       .style('font-size', '12px')
       .style('fill', theme.text)
