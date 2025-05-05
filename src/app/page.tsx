@@ -1,6 +1,6 @@
 'use client';
 
-import FitnessDashboard from '@/features/FitnessDashboard';
+import FitnessDashboard from '@/features/FitnessDashboard/FitnessDashboard';
 import Image from 'next/image';
 
 export default function Home() {

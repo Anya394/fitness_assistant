@@ -1,26 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-
-interface WeightData {
-  date: Date;
-  weight: number;
-}
-
-interface WeightProgressChartProps {
-  data: WeightData[];
-  width?: number;
-  height?: number;
-  margin?: { top: number; right: number; bottom: number; left: number };
-}
-
-const theme = {
-  primary: '#4C72B0', // Синий
-  secondary: '#DD8452', // Оранжевый
-  background: '#f9f9f9',
-  text: '#333',
-  grid: '#e0e0e0',
-  tooltipBg: 'rgba(255, 255, 255, 0.9)',
-};
+import { theme } from '@/app/Theme';
+import { WeightData, WeightProgressChartProps } from '@/app/types';
 
 const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
   data,
