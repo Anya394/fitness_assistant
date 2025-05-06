@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import WeightProgressChart from '@/entities/WeightProgressChart';
 import * as S from './FitnessDashboard.styled';
 import AddForm from '@/features/AddForm/AddForm';
+import { WeightFormData } from '@/app/types';
 
 const FitnessDashboard: React.FC = () => {
   const [weightData, setWeightData] = useState([
@@ -14,9 +15,9 @@ const FitnessDashboard: React.FC = () => {
     { date: new Date(2025, 3, 30), weight: 72.7 },
   ]);
 
-  const handleSetWeightData = (data: { date: Date; weight: string }) => {
-    setWeightData([
-      ...weightData,
+  const handleSetWeightData = (data: WeightFormData) => {
+    setWeightData((prev) => [
+      ...prev,
       {
         date: data.date,
         weight: parseFloat(data.weight),
@@ -26,13 +27,15 @@ const FitnessDashboard: React.FC = () => {
 
   return (
     <S.Dashboard>
-      <div className="fitness-dashboard">
-        <h1>Прогресс взвешиваний</h1>
+      <S.Title>Прогресс взвешиваний</S.Title>
+      <div className="dashboard-container">
         <div className="chart-container">
           <WeightProgressChart data={weightData} />
         </div>
 
-        <AddForm handleSetWeightData={handleSetWeightData} />
+        <div>
+          <AddForm handleSetWeightData={handleSetWeightData} />
+        </div>
       </div>
     </S.Dashboard>
   );

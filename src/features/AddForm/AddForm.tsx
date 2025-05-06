@@ -48,13 +48,9 @@ const AddForm: React.FC<AddFormProps> = ({ handleSetWeightData }) => {
               name="weight"
               control={control}
               rules={{
-                required: 'Введите вес',
-                min: { value: 30, message: 'Минимум 30 кг' },
-                max: { value: 300, message: 'Максимум 300 кг' },
-                pattern: {
-                  value: /^\d*\.?\d+$/,
-                  message: 'Введите число (например: 72.5)',
-                },
+                validate: (value) =>
+                  (parseFloat(value) >= 30 && parseFloat(value) <= 300) ||
+                  'Вес должен быть 30-300 кг',
               }}
               render={({ field, fieldState: { error } }) => (
                 <S.StyledTextField

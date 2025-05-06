@@ -52,18 +52,23 @@ const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
       .attr('offset', '100%')
       .attr('stop-color', theme.secondary);
 
+    // Сортировка по дате
+    const sortedData = [...data].sort(
+      (a, b) => a.date.getTime() - b.date.getTime(),
+    );
+
     // Шкалы
     const xScale = d3
       .scaleTime()
-      .domain(d3.extent(data, (d) => d.date) as [Date, Date])
+      .domain(d3.extent(sortedData, (d) => d.date) as [Date, Date])
       .range([0, innerWidth])
       .nice();
 
     const yScale = d3
       .scaleLinear()
       .domain([
-        d3.min(data, (d) => d.weight)! * 0.98,
-        d3.max(data, (d) => d.weight)! * 1.02,
+        d3.min(sortedData, (d) => d.weight)! * 0.98,
+        d3.max(sortedData, (d) => d.weight)! * 1.02,
       ])
       .range([innerHeight, 0])
       .nice();
@@ -151,7 +156,7 @@ const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
 
     svg
       .append('path')
-      .datum(data)
+      .datum(sortedData)
       .attr('fill', 'none')
       .attr('stroke', 'url(#line-gradient)')
       .attr('stroke-width', 4)
@@ -178,7 +183,7 @@ const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
 
     svg
       .append('path')
-      .datum(data)
+      .datum(sortedData)
       .attr('fill', 'url(#line-gradient)')
       .attr('fill-opacity', 0.1)
       .attr('d', area);
@@ -186,7 +191,7 @@ const WeightProgressChart: React.FC<WeightProgressChartProps> = ({
     // Точки данных
     svg
       .selectAll('.dot')
-      .data(data)
+      .data(sortedData)
       .enter()
       .append('circle')
       .attr('class', 'dot')
