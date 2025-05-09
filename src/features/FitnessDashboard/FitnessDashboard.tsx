@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import WeightProgressChart from '@/entities/WeightProgressChart';
+import WeightProgressChart from '@/entities/WeightProgressChart/WeightProgressChart';
 import * as S from './FitnessDashboard.styled';
 import AddForm from '@/features/AddForm/AddForm';
 import { WeightFormData } from '@/app/types';
