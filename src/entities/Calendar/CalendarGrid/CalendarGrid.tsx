@@ -7,16 +7,15 @@ import {
   isSameMonth,
   getDay,
 } from 'date-fns';
-import { CalendarGridProps, sampleTrainingData } from '@/app/types';
+import { CalendarGridProps } from '@/app/types';
 import * as S from './CalendarGrid.styled';
 import DayCell from '@/entities/Calendar/DayCell/DayCell';
 import { useAtom } from 'jotai';
-import { currentDateAtom } from '@/app/atomStorage';
+import { currentDateAtom, defaultTrainingData } from '@/app/atomStorage';
 
-const CalendarGrid: React.FC<CalendarGridProps> = ({
-  trainingData = sampleTrainingData,
-}) => {
+const CalendarGrid: React.FC<CalendarGridProps> = () => {
   const [currentDate] = useAtom(currentDateAtom);
+  const [trainingData] = useAtom(defaultTrainingData);
 
   const getCalendarDays = () => {
     const monthStart = startOfMonth(currentDate);

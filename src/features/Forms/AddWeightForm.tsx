@@ -1,11 +1,11 @@
 import { useForm, Controller } from 'react-hook-form';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { AddFormProps, WeightFormData } from '@/app/types';
 import * as S from './AddForm.styled';
+import DateField from '@/entities/DateField/DateField';
 
-const AddForm: React.FC<AddFormProps> = ({ handleSetWeightData }) => {
+const AddForm: React.FC<AddFormProps> = ({ handleSetData }) => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       date: new Date(),
@@ -14,32 +14,20 @@ const AddForm: React.FC<AddFormProps> = ({ handleSetWeightData }) => {
   });
 
   const onSubmit = (data: WeightFormData) => {
-    handleSetWeightData(data);
+    handleSetData(data);
     reset();
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <S.FormContainer>
-        <S.FormTitle>Добавить новое взвешивание</S.FormTitle>
+        <S.FormTitle>Добавить взвешивание</S.FormTitle>
         <form onSubmit={handleSubmit(onSubmit)} className="form">
           <S.FormField>
-            <Controller
-              name="date"
+            <DateField
               control={control}
-              render={({ field }) => (
-                <DatePicker
-                  label="Дата взвешивания"
-                  maxDate={new Date()}
-                  value={field.value}
-                  onChange={field.onChange}
-                  slotProps={{
-                    textField: {
-                      fullWidth: true,
-                    },
-                  }}
-                />
-              )}
+              name={'date'}
+              label="Дата взвешивания"
             />
           </S.FormField>
 

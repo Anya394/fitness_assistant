@@ -1,6 +1,6 @@
 'use client';
 
-import FitnessDashboard from '@/features/FitnessDashboard/FitnessDashboard';
+import FitnessDashboard from '@/features/Widget/WeighingWidget/WeighingWidget';
 import Link from 'next/link';
 
 export default function Weight() {
