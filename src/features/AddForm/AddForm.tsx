@@ -67,7 +67,7 @@ const AddForm: React.FC<AddFormProps> = ({ handleSetWeightData }) => {
           </S.FormField>
 
           <S.SubmitButton type="submit" variant="contained" fullWidth>
-            Добавить запись
+            Добавить
           </S.SubmitButton>
         </form>
       </S.FormContainer>
