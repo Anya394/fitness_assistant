@@ -72,3 +72,20 @@ export interface DateFieldProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
 }
+
+// Пользователь.
+export interface User {
+  id: string;
+  email: string;
+  password: string;
+  salt: string;
+  name?: string;
+  role?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Свойства кнопок.
+export interface ButtonProps {
+  toggleDrawer: () => void;
+}

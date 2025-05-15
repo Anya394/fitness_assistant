@@ -7,7 +7,6 @@ const DateField = <T extends FieldValues>({
   name,
   label,
 }: DateFieldProps<T>) => {
-
   return (
     <Controller
       name={name}
