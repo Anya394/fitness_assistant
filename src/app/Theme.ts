@@ -5,5 +5,4 @@ export const theme = {
   text: '#333',
   grid: '#e0e0e0',
   tooltipBg: 'rgba(255, 255, 255, 0.9)',
-  weekend: '#DD8452',
 };

@@ -2,13 +2,13 @@ import { isLoggedInAtom } from '@/app/atomStorage';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
 import router from 'next/router';
-import { SecondaryButton } from './ButtonLogout.styled';
+import * as S from './SecondaryButtons.styled';
 import { ButtonProps } from '@/app/types';
 
 const ButtonLogout: React.FC<ButtonProps> = ({ toggleDrawer }) => {
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
 
-  const handleLogout = async (isMobile: boolean) => {
+  const handleLogout = async () => {
     try {
       const response = await fetch('/api/logout', {
         method: 'POST',
@@ -28,14 +28,14 @@ const ButtonLogout: React.FC<ButtonProps> = ({ toggleDrawer }) => {
       console.log('An error occurred. Please try again.');
     }
 
-    if (isMobile) toggleDrawer();
+    if (toggleDrawer) toggleDrawer();
   };
 
   return (
-    <Link href="/" passHref onClick={() => handleLogout(false)}>
-      <SecondaryButton variant="contained" fullWidth>
+    <Link href="/" passHref onClick={() => handleLogout()}>
+      <S.SecondaryButton variant="contained" fullWidth>
         Выйти
-      </SecondaryButton>
+      </S.SecondaryButton>
     </Link>
   );
 };

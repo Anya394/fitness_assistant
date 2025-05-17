@@ -9,13 +9,19 @@ export async function POST(request: NextRequest) {
     // Поиск пользователя
     const user = await User.findByEmail(email);
     if (!user) {
-      return NextResponse.json({ error: 'Invalid login' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Указанная электронная почта не зарегистрирована' },
+        { status: 401 },
+      );
     }
 
     // Проверка пароля
-    const isMatch = await comparePasswords(password, user.password, user.salt);
+    const isMatch = await comparePasswords(password, user.password);
     if (!isMatch) {
-      return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
+      return NextResponse.json(
+        { error: 'Введенный пароль неверный' },
+        { status: 401 },
+      );
     }
 
     // Генерация токена

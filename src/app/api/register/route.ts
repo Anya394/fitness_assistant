@@ -10,15 +10,13 @@ export async function POST(request: NextRequest) {
     const existingUser = await User.findByEmail(email);
     if (existingUser) {
       return NextResponse.json(
-        { error: 'User already exists' },
+        { error: 'Аккаунт с указанной электронной почтой уже существует' },
         { status: 400 },
       );
     }
 
     // Хеширование пароля и создание пользователя
-    //const hashedPassword = await hashPassword(password);
-    const salt = crypto.getRandomValues(new Uint8Array(16)).toString('hex');
-    const user = await User.create({ email, password: password, salt: salt });
+    const user = await User.create({ email, password: password });
 
     // Генерация токена
     const token = await generateToken({ userId: user.id, email: user.email });

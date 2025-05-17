@@ -15,6 +15,4 @@ export const defaultTrainingData = atom([
   { date: new Date(2025, 5, 10), title: 'Спиннинг' },
 ]);
 
-export const defaultUsers = atom<User[]>([]);
-
 export const isLoggedInAtom = atom(false);

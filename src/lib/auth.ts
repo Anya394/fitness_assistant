@@ -18,10 +18,12 @@ export async function hashPassword(
 
 export async function comparePasswords(
   password: string,
-  hashedPassword: string,
-  storedSalt: string,
+  hashedPasswordWithSalt: string,
 ): Promise<boolean> {
-  const newHash = await hashPassword(password, storedSalt);
+  const arr = hashedPasswordWithSalt.split(':');
+  const salt = arr[0];
+  const hashedPassword = arr[1];
+  const newHash = await hashPassword(password, salt);
   return newHash === hashedPassword;
 }
 

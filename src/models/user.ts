@@ -1,25 +1,38 @@
-import { defaultUsers } from '@/app/atomStorage';
 import { User } from '@/app/types';
 import { hashPassword } from '@/lib/auth';
 
 // Хранилище пользователей в памяти
-let users: User[] = [];
+let users: User[] = [
+  {
+    id: 'oyfefpq',
+    email: 'admin@example.com',
+    password:
+      '84,254,193,207,176,74,70,230,64,94,237,212,169,207,252,83:17956d5bd99b6d33adf8151c8832b2ee9ac7a02ba0aef5f384cc7e14f70c0c31',
+    name: 'Admin',
+    role: 'admin',
+    createdAt: new Date('2025-05-16T14:01:52.245Z'),
+    updatedAt: new Date('2025-05-16T14:01:52.245Z'),
+  },
+];
 
 export default {
   async create(
     userData: Omit<User, 'id' | 'createdAt' | 'updatedAt'>,
   ): Promise<User> {
-    const hashedPassword = await hashPassword(userData.password, userData.salt);
+    const salt = crypto.getRandomValues(new Uint8Array(16)).toString('hex');
+    const hashedPassword = await hashPassword(userData.password, salt);
+    const hashedPasswordWithSalt = salt + ':' + hashedPassword;
 
     const newUser: User = {
       id: Math.random().toString(36).substring(2, 9),
       ...userData,
-      password: hashedPassword,
-      salt: userData.salt,
+      password: hashedPasswordWithSalt,
       role: userData.role || 'user',
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+
+    console.log(newUser);
 
     users.push(newUser);
     return newUser;
