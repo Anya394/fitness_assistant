@@ -1,5 +1,5 @@
-import { atom, useAtom } from 'jotai';
-import { TrainingData } from './types';
+import { atom } from 'jotai';
+import { User } from './types';
 
 export const currentDateAtom = atom(new Date());
 
@@ -14,3 +14,5 @@ export const defaultTrainingData = atom([
   { date: new Date(2025, 5, 10), title: 'Тренажерный зал' },
   { date: new Date(2025, 5, 10), title: 'Спиннинг' },
 ]);
+
+export const isLoggedInAtom = atom(false);

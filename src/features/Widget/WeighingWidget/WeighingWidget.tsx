@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import WeightProgressChart from '@/entities/WeightProgressChart/WeightProgressChart';
 import * as S from './WeighingWidget.styled';
-import AddForm from '@/features/Forms/AddWeightForm';
+import AddForm from '@/features/Forms/AddDataForms/AddWeightForm';
 import { WeightFormData } from '@/app/types';
 
 const FitnessDashboard: React.FC = () => {

@@ -72,3 +72,48 @@ export interface DateFieldProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
 }
+
+// Пользователь.
+export interface User {
+  id: string;
+  email: string;
+  password: string;
+  name?: string;
+  role?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Свойства кнопок.
+export interface ButtonProps {
+  toggleDrawer?: () => void;
+}
+
+// Свойства подвала формы регистрации.
+export interface FormFooterProps {
+  question: string;
+  answer: string;
+  link: string;
+}
+
+// Свойства названия формы.
+export interface FormTitleProps {
+  text: string;
+}
+
+// Свойства полей формы регистрации/входа.
+export interface FieldProps {
+  register: any;
+  errors: any;
+}
+
+// Данные формы регистрации/входа.
+export interface AuthenticationFormData {
+  email: string;
+  password: string;
+}
+
+// Свойства навигационных кнопок.
+export interface NavButtonProps {
+  active?: boolean;
+}

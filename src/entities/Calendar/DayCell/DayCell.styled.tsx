@@ -12,7 +12,7 @@ export const DayCell = styled('div')<DayCellStyleProps>(
     justifyContent: 'center',
     position: 'relative',
     opacity: isOtherMonth ? 0.4 : 1,
-    color: isWeekend ? theme.weekend : theme.text,
+    color: isWeekend ? theme.secondary : theme.text,
   }),
 );
 

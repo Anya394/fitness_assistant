@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './TrainingWidget.styled';
 import { TrainingData } from '@/app/types';
 import TrainingCalendar from '../../../entities/Calendar/TrainingCalendar/TrainingCalendar';
-import AddWorkoutForm from '../../Forms/AddWorkoutForm';
+import AddWorkoutForm from '../../Forms/AddDataForms/AddWorkoutForm';
 import { defaultTrainingData } from '@/app/atomStorage';
 import { useAtom } from 'jotai';
 
