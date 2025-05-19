@@ -64,6 +64,7 @@ export interface CalendarGridProps {
 // Свойства формы добавления тренировок.
 export interface TrainFormProps {
   handleSetData: (data: TrainingData) => void;
+  onSubmit?: (data: TrainingData) => void;
 }
 
 // Свойства поля с датой в формах.
