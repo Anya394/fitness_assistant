@@ -16,6 +16,8 @@ const EmailField: React.FC<FieldProps> = ({ register, errors }) => {
           },
         })}
         placeholder="Введите ваш email"
+        data-testid="email-input"
+        name="email"
       />
       <S.ErrorText>{errors.email?.message}</S.ErrorText>
     </S.InputGroup>

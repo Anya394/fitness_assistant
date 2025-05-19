@@ -58,7 +58,11 @@ const RegisterForm = () => {
 
         <PasswordField register={register} errors={errors} />
 
-        <S.SubmitButton type="submit" disabled={isSubmitting}>
+        <S.SubmitButton
+          type="submit"
+          disabled={isSubmitting}
+          data-testid="register-button"
+        >
           {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
         </S.SubmitButton>
 

@@ -1,5 +1,4 @@
 import { atom } from 'jotai';
-import { User } from './types';
 
 export const currentDateAtom = atom(new Date());
 

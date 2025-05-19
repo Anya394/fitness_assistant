@@ -5,7 +5,10 @@ import { TrainFormProps, TrainingData } from '@/app/types';
 import * as S from './AddForm.styled';
 import DateField from '@/entities/DateField/DateField';
 
-const AddWorkoutForm: React.FC<TrainFormProps> = ({ handleSetData }) => {
+const AddWorkoutForm: React.FC<TrainFormProps> = ({
+  handleSetData,
+  onSubmit,
+}) => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       date: new Date(),
@@ -13,10 +16,12 @@ const AddWorkoutForm: React.FC<TrainFormProps> = ({ handleSetData }) => {
     },
   });
 
-  const onSubmit = (data: TrainingData) => {
+  const onSubmitRes = (data: TrainingData) => {
     handleSetData(data);
     reset();
   };
+
+  if (!onSubmit) onSubmit = onSubmitRes;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

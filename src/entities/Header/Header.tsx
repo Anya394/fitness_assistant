@@ -59,7 +59,11 @@ export default function Header() {
               <ButtonRegister />
             </Box>
           )}
-          {isLoggedIn && <ButtonLogout />}
+          {isLoggedIn && (
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+              <ButtonLogout />{' '}
+            </Box>
+          )}
         </Box>
 
         <IconButton
@@ -84,8 +88,8 @@ export default function Header() {
               width: '80%',
               maxWidth: 300,
               p: 3,
-            }
-          }
+            },
+          },
         }}
       >
         <List>
@@ -105,10 +109,12 @@ export default function Header() {
 
           <Box>
             {!isLoggedIn && (
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}
+              >
                 <ButtonLogin toggleDrawer={toggleDrawer} />
                 <ButtonRegister toggleDrawer={toggleDrawer} />
-                </Box>
+              </Box>
             )}
             {isLoggedIn && <ButtonLogout toggleDrawer={toggleDrawer} />}
           </Box>

@@ -16,6 +16,8 @@ const PasswordField: React.FC<FieldProps> = ({ register, errors }) => {
           },
         })}
         placeholder="Введите ваш пароль"
+        data-testid="password-input"
+        name="password"
       />
       <S.ErrorText>{errors.password?.message}</S.ErrorText>
     </S.InputGroup>

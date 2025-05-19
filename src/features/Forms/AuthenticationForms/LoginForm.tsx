@@ -12,7 +12,11 @@ import EmailField from '@/entities/AuthenticationForms/Fields/EmailField';
 import PasswordField from '@/entities/AuthenticationForms/Fields/PasswordField';
 import { AuthenticationFormData } from '@/app/types';
 
-const LoginForm = () => {
+const LoginForm = ({
+  onSubmit,
+}: {
+  onSubmit: (data: AuthenticationFormData) => void;
+}) => {
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
@@ -24,7 +28,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<AuthenticationFormData>();
 
-  const onSubmit = async (data: AuthenticationFormData) => {
+  const onSubmitRes = async (data: AuthenticationFormData) => {
     setIsSubmitting(true);
     setFormError('');
 
@@ -49,6 +53,8 @@ const LoginForm = () => {
     }
   };
 
+  if (!onSubmit) onSubmit = onSubmitRes;
+
   return (
     <S.FormContainer>
       <FormTitle text="Пожалуйста, войдите" />
@@ -57,7 +63,11 @@ const LoginForm = () => {
 
         <PasswordField register={register} errors={errors} />
 
-        <S.SubmitButton type="submit" disabled={isSubmitting}>
+        <S.SubmitButton
+          type="submit"
+          disabled={isSubmitting}
+          data-testid="login-button"
+        >
           {isSubmitting ? 'Вход...' : 'Войти'}
         </S.SubmitButton>
 
