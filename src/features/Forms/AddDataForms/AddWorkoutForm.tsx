@@ -1,17 +1,22 @@
+'use client';
+
 import { useForm, Controller } from 'react-hook-form';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { TrainFormProps, TrainingData } from '@/app/types';
 import * as S from './AddForm.styled';
 import DateField from '@/entities/DateField/DateField';
+import { useState } from 'react';
 
 const AddWorkoutForm: React.FC<TrainFormProps> = ({
   handleSetData,
   onSubmit,
 }) => {
+  const [TodeyDate, setDate] = useState(new Date());
+
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
-      date: new Date(),
+      date: TodeyDate,
       title: '',
     },
   });

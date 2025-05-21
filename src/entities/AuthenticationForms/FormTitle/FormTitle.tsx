@@ -1,3 +1,5 @@
+'use client';
+
 import { FormTitleProps } from '@/app/types';
 import * as S from './FormTitle.styles';
 

@@ -15,7 +15,7 @@ import { AuthenticationFormData } from '@/app/types';
 const LoginForm = ({
   onSubmit,
 }: {
-  onSubmit: (data: AuthenticationFormData) => void;
+  onSubmit?: (data: AuthenticationFormData) => void;
 }) => {
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
