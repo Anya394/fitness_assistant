@@ -6,8 +6,10 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { AddFormProps, WeightFormData } from '@/app/types';
 import * as S from './AddForm.styled';
 import DateField from '@/entities/DateField/DateField';
+import SubmitButton from '@/entities/Buttons/SubmitButton/SubmitButton';
+import { Box } from '@mui/material';
 
-const AddForm: React.FC<AddFormProps> = ({ handleSetData }) => {
+const AddWeightForm: React.FC<AddFormProps> = ({ handleSetData }) => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       date: new Date(),
@@ -24,7 +26,14 @@ const AddForm: React.FC<AddFormProps> = ({ handleSetData }) => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <S.FormContainer>
         <S.FormTitle>Добавить взвешивание</S.FormTitle>
-        <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <Box
+          component="form"
+          sx={{
+            width: { xs: '90vw', sm: '400px', md: '500px' },
+            p: { xs: 2, md: 3 },
+          }}
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <S.FormField>
             <DateField
               control={control}
@@ -56,13 +65,11 @@ const AddForm: React.FC<AddFormProps> = ({ handleSetData }) => {
             />
           </S.FormField>
 
-          <S.SubmitButton type="submit" variant="contained" fullWidth>
-            Добавить
-          </S.SubmitButton>
-        </form>
+          <SubmitButton />
+        </Box>
       </S.FormContainer>
     </LocalizationProvider>
   );
 };
 
-export default AddForm;
+export default AddWeightForm;

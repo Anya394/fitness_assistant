@@ -118,3 +118,9 @@ export interface AuthenticationFormData {
 export interface NavButtonProps {
   active?: boolean;
 }
+
+// Свойства кнопок.
+export interface SubmitButtonProps {
+  text?: string;
+  handleClick?: () => void;
+}
