@@ -37,7 +37,7 @@ const HomePage = () => {
             Отслеживайте прогресс, планируйте тренировки и анализируйте
             результаты
           </S.HeroSubtitle>
-          <S.StartButton as="a" href="/login">
+          <S.StartButton as="a" href="/">
             Начать бесплатно
           </S.StartButton>
         </S.Container>
