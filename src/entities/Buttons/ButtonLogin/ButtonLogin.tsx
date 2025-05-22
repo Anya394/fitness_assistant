@@ -4,7 +4,7 @@ import { ButtonProps } from '@/app/types';
 
 const ButtonLogin: React.FC<ButtonProps> = ({ toggleDrawer }) => {
   return (
-    <Link href="/login" passHref onClick={toggleDrawer}>
+    <Link href="/login" passHref onClick={toggleDrawer} prefetch={false}>
       <S.PrimaryButton variant="contained" fullWidth>
         Вход
       </S.PrimaryButton>

@@ -7,7 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import * as S from './CalendarHeader.styled';
 import { currentDateAtom } from '@/app/atomStorage';
 
-const TrainingCalendar: React.FC = () => {
+const CalendarHeader: React.FC = React.memo(() => {
   const [currentDate, setCurrentDate] = useAtom(currentDateAtom);
 
   const handlePrevMonth = () => setCurrentDate(subMonths(currentDate, 1));
@@ -28,6 +28,6 @@ const TrainingCalendar: React.FC = () => {
       </S.NavigationButton>
     </S.CalendarHeader>
   );
-};
+});
 
-export default TrainingCalendar;
+export default CalendarHeader;

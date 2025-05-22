@@ -20,6 +20,8 @@ const TrainingWidget: React.FC = () => {
         title: data.title,
       },
     ]);
+
+    setOpenDialog(false);
   };
 
   return (

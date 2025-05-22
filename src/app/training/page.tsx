@@ -1,7 +1,6 @@
 'use client';
 
 import TrainingWidget from '@/features/Widget/TrainingWidget/TrainingWidget';
-import Link from 'next/link';
 
 export default function Training() {
   return (

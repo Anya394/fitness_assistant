@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import * as S from './Form.styles';
 import { useAtom } from 'jotai';
 import { isLoggedInAtom } from '@/app/atomStorage';
@@ -12,7 +12,7 @@ import PasswordField from '@/entities/AuthenticationForms/Fields/PasswordField';
 import { AuthenticationFormData } from '@/app/types';
 import { useRouter } from 'next/navigation';
 
-const RegisterForm = () => {
+const RegisterForm = React.memo(() => {
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
@@ -24,7 +24,7 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<AuthenticationFormData>();
 
-  const onSubmit = async (data: AuthenticationFormData) => {
+  const onSubmit = useCallback(async (data: AuthenticationFormData) => {
     setIsSubmitting(true);
     setFormError('');
 
@@ -33,6 +33,7 @@ const RegisterForm = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
+        next: { revalidate: 3600 },
       });
 
       if (res.ok) {
@@ -48,7 +49,7 @@ const RegisterForm = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, []);
 
   return (
     <S.FormContainer>
@@ -76,6 +77,6 @@ const RegisterForm = () => {
       </S.StyledForm>
     </S.FormContainer>
   );
-};
+});
 
 export default RegisterForm;

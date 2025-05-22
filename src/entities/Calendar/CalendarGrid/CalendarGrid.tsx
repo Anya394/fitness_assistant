@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   startOfMonth,
   endOfMonth,
@@ -13,11 +13,11 @@ import DayCell from '@/entities/Calendar/DayCell/DayCell';
 import { useAtom } from 'jotai';
 import { currentDateAtom, defaultTrainingData } from '@/app/atomStorage';
 
-const CalendarGrid: React.FC<CalendarGridProps> = () => {
+const CalendarGrid: React.FC<CalendarGridProps> = React.memo(() => {
   const [currentDate] = useAtom(currentDateAtom);
   const [trainingData] = useAtom(defaultTrainingData);
 
-  const getCalendarDays = () => {
+  const getCalendarDays = useMemo(() => {
     const monthStart = startOfMonth(currentDate);
     const monthEnd = endOfMonth(currentDate);
     const startDay = getDay(monthStart) === 0 ? 6 : getDay(monthStart) - 1;
@@ -41,9 +41,9 @@ const CalendarGrid: React.FC<CalendarGridProps> = () => {
     }
 
     return days;
-  };
+  }, [currentDate]);
 
-  const calendarDays = getCalendarDays();
+  const calendarDays = getCalendarDays;
   const weekdayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
   return (
@@ -70,6 +70,6 @@ const CalendarGrid: React.FC<CalendarGridProps> = () => {
       })}
     </S.CalendarGrid>
   );
-};
+});
 
 export default CalendarGrid;

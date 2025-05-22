@@ -18,6 +18,7 @@ import { isLoggedInAtom } from '@/app/atomStorage';
 import ButtonLogout from '../Buttons/SecondaryButtons/ButtonLogout';
 import ButtonLogin from '../Buttons/ButtonLogin/ButtonLogin';
 import ButtonRegister from '../Buttons/SecondaryButtons/ButtonRegister';
+import NavItem from './NavItem';
 
 export default function Header() {
   const pathname = usePathname();
@@ -36,7 +37,7 @@ export default function Header() {
       <Toolbar
         sx={{ justifyContent: 'space-between', px: { xs: 2, md: '5%' } }}
       >
-        <Link href="/" passHref>
+        <Link href="/" passHref prefetch={false}>
           <S.LogoText variant="h6">
             <S.LogoAccent>Fitness</S.LogoAccent>Assistant
           </S.LogoText>
@@ -44,11 +45,7 @@ export default function Header() {
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
           {navItems.map((item) => (
-            <Link key={item.path} href={item.path} passHref>
-              <S.NavButton active={pathname === item.path}>
-                {item.label}
-              </S.NavButton>
-            </Link>
+            <NavItem key={item.path} item={item} pathname={pathname} />
           ))}
         </Box>
 
@@ -95,7 +92,12 @@ export default function Header() {
         <List>
           {navItems.map((item) => (
             <ListItem key={item.path} disablePadding>
-              <Link href={item.path} passHref onClick={toggleDrawer}>
+              <Link
+                href={item.path}
+                passHref
+                onClick={toggleDrawer}
+                prefetch={false}
+              >
                 <S.NavButton
                   fullWidth
                   sx={{ justifyContent: 'flex-start' }}
