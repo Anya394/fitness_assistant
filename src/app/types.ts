@@ -75,7 +75,7 @@ export interface DateFieldProps<T extends FieldValues> {
 }
 
 // Пользователь.
-export interface User {
+export interface IUser {
   id: string;
   email: string;
   password: string;
@@ -117,4 +117,10 @@ export interface AuthenticationFormData {
 // Свойства навигационных кнопок.
 export interface NavButtonProps {
   active?: boolean;
+}
+
+// Свойства кнопок.
+export interface SubmitButtonProps {
+  text?: string;
+  handleClick?: () => void;
 }

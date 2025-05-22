@@ -12,7 +12,7 @@ export const Weekday = styled('div')<{ isWeekend?: boolean }>(
     textAlign: 'center',
     padding: '8px 0',
     fontWeight: 500,
-    color: isWeekend ? theme.weekend : theme.text,
+    color: isWeekend ? theme.secondary : theme.text,
     fontSize: '0.875rem',
     textTransform: 'uppercase',
     letterSpacing: '0.5px',

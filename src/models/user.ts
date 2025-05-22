@@ -1,8 +1,8 @@
-import { User } from '@/app/types';
+import { IUser } from '@/app/types';
 import { hashPassword } from '@/lib/auth';
 
 // Хранилище пользователей в памяти
-let users: User[] = [
+const users: IUser[] = [
   {
     id: 'oyfefpq',
     email: 'admin@example.com',
@@ -15,15 +15,15 @@ let users: User[] = [
   },
 ];
 
-export default {
+const User = {
   async create(
-    userData: Omit<User, 'id' | 'createdAt' | 'updatedAt'>,
-  ): Promise<User> {
+    userData: Omit<IUser, 'id' | 'createdAt' | 'updatedAt'>,
+  ): Promise<IUser> {
     const salt = crypto.getRandomValues(new Uint8Array(16)).toString('hex');
     const hashedPassword = await hashPassword(userData.password, salt);
     const hashedPasswordWithSalt = salt + ':' + hashedPassword;
 
-    const newUser: User = {
+    const newUser: IUser = {
       id: Math.random().toString(36).substring(2, 9),
       ...userData,
       password: hashedPasswordWithSalt,
@@ -38,11 +38,11 @@ export default {
     return newUser;
   },
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<IUser | null> {
     return users.find((user) => user.email === email) || null;
   },
 
-  async findById(id: string): Promise<User | null> {
+  async findById(id: string): Promise<IUser | null> {
     return users.find((user) => user.id === id) || null;
   },
 
@@ -82,3 +82,5 @@ export default {
     });
   }*/
 };
+
+export default User;

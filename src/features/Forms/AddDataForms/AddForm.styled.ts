@@ -1,6 +1,6 @@
 import { theme } from '@/app/Theme';
-import styled, { css } from 'styled-components';
-import { TextField, Button } from '@mui/material';
+import styled from 'styled-components';
+import { TextField } from '@mui/material';
 
 // Стилизованные компоненты
 export const FormContainer = styled.div`
@@ -8,8 +8,7 @@ export const FormContainer = styled.div`
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  max-width: 420px;
-  margin: 32px auto 0;
+  max-width: 600px;
   border: 1px solid ${theme.grid};
 `;
 
@@ -34,24 +33,6 @@ export const StyledTextField = styled(TextField)`
     &.Mui-focused .MuiOutlinedInput-notchedOutline {
       border-color: ${theme.primary};
       border-width: 1px;
-    }
-  }
-`;
-
-export const SubmitButton = styled(Button)`
-  && {
-    background-color: ${theme.primary};
-    color: white;
-    padding: 12px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    border-radius: 8px;
-    margin-top: 16px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: ${theme.secondary};
-      transform: translateY(-2px);
     }
   }
 `;

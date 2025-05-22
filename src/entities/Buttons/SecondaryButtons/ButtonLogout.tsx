@@ -15,6 +15,7 @@ const ButtonLogout: React.FC<ButtonProps> = ({ toggleDrawer }) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        next: { revalidate: 3600 },
       });
 
       if (response.ok) {
@@ -32,7 +33,7 @@ const ButtonLogout: React.FC<ButtonProps> = ({ toggleDrawer }) => {
   };
 
   return (
-    <Link href="/" passHref onClick={() => handleLogout()}>
+    <Link href="/" passHref onClick={() => handleLogout()} prefetch={false}>
       <S.SecondaryButton variant="contained" fullWidth>
         Выйти
       </S.SecondaryButton>

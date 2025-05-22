@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import * as S from './Form.styles';
 import { useAtom } from 'jotai';
 import { isLoggedInAtom } from '@/app/atomStorage';
@@ -12,7 +12,7 @@ import PasswordField from '@/entities/AuthenticationForms/Fields/PasswordField';
 import { AuthenticationFormData } from '@/app/types';
 import { useRouter } from 'next/navigation';
 
-const RegisterForm = () => {
+const RegisterForm = React.memo(() => {
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useAtom(isLoggedInAtom);
@@ -24,31 +24,35 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<AuthenticationFormData>();
 
-  const onSubmit = async (data: AuthenticationFormData) => {
-    setIsSubmitting(true);
-    setFormError('');
+  const onSubmit = useCallback(
+    async (data: AuthenticationFormData) => {
+      setIsSubmitting(true);
+      setFormError('');
 
-    try {
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          next: { revalidate: 3600 },
+        });
 
-      if (res.ok) {
-        setIsLoggedIn(true);
-        router.push('/');
-      } else {
-        const data = await res.json();
-        setFormError(data.error || 'Login failed');
+        if (res.ok) {
+          setIsLoggedIn(true);
+          router.push('/');
+        } else {
+          const data = await res.json();
+          setFormError(data.error || 'Login failed');
+        }
+      } catch (err: any) {
+        setFormError(err?.error || 'An error occurred. Please try again.');
+        setIsLoggedIn(false);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (err: any) {
-      setFormError(err?.error || 'An error occurred. Please try again.');
-      setIsLoggedIn(false);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    },
+    [router, setIsLoggedIn],
+  );
 
   return (
     <S.FormContainer>
@@ -76,6 +80,7 @@ const RegisterForm = () => {
       </S.StyledForm>
     </S.FormContainer>
   );
-};
+});
 
+RegisterForm.displayName = 'RegisterForm';
 export default RegisterForm;
