@@ -75,7 +75,7 @@ export interface DateFieldProps<T extends FieldValues> {
 }
 
 // Пользователь.
-export interface User {
+export interface IUser {
   id: string;
   email: string;
   password: string;

@@ -1,6 +1,6 @@
 import { serialize } from 'cookie';
 import { NextResponse } from 'next/server';
-import { SignJWT, jwtVerify } from 'jose';
+import { JWTPayload, SignJWT, jwtVerify } from 'jose';
 
 const SECRET_KEY = new TextEncoder().encode(process.env.JWT_SECRET_KEY!);
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 дней
@@ -27,7 +27,10 @@ export async function comparePasswords(
   return newHash === hashedPassword;
 }
 
-export async function generateToken(payload: any): Promise<string> {
+export async function generateToken(payload: {
+  userId: string;
+  email: string;
+}): Promise<string> {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
@@ -35,13 +38,13 @@ export async function generateToken(payload: any): Promise<string> {
     .sign(SECRET_KEY);
 }
 
-export async function verifyToken(token: string): Promise<any> {
+export async function verifyToken(token: string): Promise<JWTPayload> {
   try {
     const { payload } = await jwtVerify(token, SECRET_KEY);
     console.log(payload);
     return payload;
   } catch (err) {
-    throw new Error('Invalid token');
+    throw new Error('Invalid token. ' + err);
   }
 }
 

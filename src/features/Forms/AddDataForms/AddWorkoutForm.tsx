@@ -78,4 +78,5 @@ const AddWorkoutForm: React.FC<TrainFormProps> = React.memo(
   },
 );
 
+AddWorkoutForm.displayName = 'AddWorkoutForm';
 export default AddWorkoutForm;

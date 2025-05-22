@@ -72,4 +72,5 @@ const CalendarGrid: React.FC<CalendarGridProps> = React.memo(() => {
   );
 });
 
+CalendarGrid.displayName = 'CalendarGrid';
 export default CalendarGrid;

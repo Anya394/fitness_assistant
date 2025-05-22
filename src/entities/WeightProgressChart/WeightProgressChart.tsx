@@ -281,4 +281,5 @@ const WeightProgressChart: React.FC<WeightProgressChartProps> = React.memo(
   },
 );
 
+WeightProgressChart.displayName = 'WeightProgressChart';
 export default WeightProgressChart;

@@ -9,7 +9,7 @@ import SubmitButton from '@/entities/Buttons/SubmitButton/SubmitButton';
 import { defaultWeightData } from '@/app/atomStorage';
 import { useAtom } from 'jotai';
 
-const FitnessDashboard = React.memo(() => {
+const WeighingWidget = React.memo(() => {
   const [openDialog, setOpenDialog] = useState(false);
   const [weightData, setWeightData] = useAtom(defaultWeightData);
 
@@ -57,4 +57,5 @@ const FitnessDashboard = React.memo(() => {
   );
 });
 
-export default FitnessDashboard;
+WeighingWidget.displayName = 'WeighingWidget';
+export default WeighingWidget;

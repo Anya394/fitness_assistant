@@ -24,32 +24,35 @@ const RegisterForm = React.memo(() => {
     formState: { errors },
   } = useForm<AuthenticationFormData>();
 
-  const onSubmit = useCallback(async (data: AuthenticationFormData) => {
-    setIsSubmitting(true);
-    setFormError('');
+  const onSubmit = useCallback(
+    async (data: AuthenticationFormData) => {
+      setIsSubmitting(true);
+      setFormError('');
 
-    try {
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        next: { revalidate: 3600 },
-      });
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          next: { revalidate: 3600 },
+        });
 
-      if (res.ok) {
-        setIsLoggedIn(true);
-        router.push('/');
-      } else {
-        const data = await res.json();
-        setFormError(data.error || 'Login failed');
+        if (res.ok) {
+          setIsLoggedIn(true);
+          router.push('/');
+        } else {
+          const data = await res.json();
+          setFormError(data.error || 'Login failed');
+        }
+      } catch (err: any) {
+        setFormError(err?.error || 'An error occurred. Please try again.');
+        setIsLoggedIn(false);
+      } finally {
+        setIsSubmitting(false);
       }
-    } catch (err: any) {
-      setFormError(err?.error || 'An error occurred. Please try again.');
-      setIsLoggedIn(false);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, []);
+    },
+    [router, setIsLoggedIn],
+  );
 
   return (
     <S.FormContainer>
@@ -79,4 +82,5 @@ const RegisterForm = React.memo(() => {
   );
 });
 
+RegisterForm.displayName = 'RegisterForm';
 export default RegisterForm;

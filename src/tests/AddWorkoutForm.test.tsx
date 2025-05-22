@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 jest.mock('next/navigation');
 
 jest.mock('@mui/x-date-pickers/DatePicker', () => ({
-  DatePicker: jest.fn(({ value, onChange, label, renderInput, ...props }) => {
+  DatePicker: jest.fn(({ value, onChange, label, ...props }) => {
     return (
       <TextField
         {...props}

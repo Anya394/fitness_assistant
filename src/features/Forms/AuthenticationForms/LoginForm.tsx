@@ -25,31 +25,34 @@ const LoginForm = React.memo(
       formState: { errors },
     } = useForm<AuthenticationFormData>();
 
-    const onSubmitRes = useCallback(async (data: AuthenticationFormData) => {
-      setIsSubmitting(true);
-      setFormError('');
+    const onSubmitRes = useCallback(
+      async (data: AuthenticationFormData) => {
+        setIsSubmitting(true);
+        setFormError('');
 
-      try {
-        const res = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-          next: { revalidate: 3600 },
-        });
+        try {
+          const res = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            next: { revalidate: 3600 },
+          });
 
-        if (!res.ok) throw await res.json();
+          if (!res.ok) throw await res.json();
 
-        setIsLoggedIn(true);
-        router.push('/');
-      } catch (err: any) {
-        setFormError(
-          err?.error ||
-            'Login failed. Please check your credentials and try again.',
-        );
-      } finally {
-        setIsSubmitting(false);
-      }
-    }, []);
+          setIsLoggedIn(true);
+          router.push('/');
+        } catch (err: any) {
+          setFormError(
+            err?.error ||
+              'Login failed. Please check your credentials and try again.',
+          );
+        } finally {
+          setIsSubmitting(false);
+        }
+      },
+      [router, setIsLoggedIn],
+    );
 
     if (!onSubmit) onSubmit = onSubmitRes;
 
@@ -82,4 +85,5 @@ const LoginForm = React.memo(
   },
 );
 
+LoginForm.displayName = 'LoginForm';
 export default LoginForm;

@@ -10,4 +10,5 @@ const NavItem = React.memo(
   ),
 );
 
+NavItem.displayName = 'NavItem';
 export default NavItem;

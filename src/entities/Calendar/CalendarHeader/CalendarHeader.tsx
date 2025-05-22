@@ -30,4 +30,5 @@ const CalendarHeader: React.FC = React.memo(() => {
   );
 });
 
+CalendarHeader.displayName = 'CalendarHeader';
 export default CalendarHeader;

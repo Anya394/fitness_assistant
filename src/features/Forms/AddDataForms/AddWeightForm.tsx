@@ -75,4 +75,5 @@ const AddWeightForm: React.FC<AddFormProps> = React.memo(
   },
 );
 
+AddWeightForm.displayName = 'AddWeightForm';
 export default AddWeightForm;
