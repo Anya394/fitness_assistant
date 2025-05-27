@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateToken, setTokenCookie } from '@/lib/auth';
-import User from '@/models/user'; // Ваша модель пользователя
+import User from '@/models/user';
 
 export async function POST(request: NextRequest) {
   try {
